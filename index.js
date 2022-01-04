@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const baseurl = "http://kirito-db-api.vercel.app"
+const { version } = require('./package.json')
 
 async function test() {
     console.log("Hello Banh") 
@@ -15,5 +16,6 @@ async function status(code) {
 
 module.exports = {
     test, 
-    status
+    status, 
+    version
 }
