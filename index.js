@@ -1,6 +1,5 @@
 const fetch = require('node-fetch')
-const baseurl = "http://kirito-db-api.vercel.app/"
-const chalk = require("chalk")
+const baseurl = "http://kirito-db-api.vercel.app"
 
 async function test() {
     console.log("Hello Banh") 
