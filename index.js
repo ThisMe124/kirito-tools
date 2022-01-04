@@ -6,7 +6,7 @@ async function test() {
 }
 
 async function status(code) {
-    if (!code) throw new Error("Error: No package name provided")
+    if (!code) throw new Error("Error: No code provided")
     const crs = await fetch(`${baseurl}/db/status?code=${encodeURIComponent(code)}`)
     const result = await crs.json()
     if(!result) throw new Error("Fetch Error")
