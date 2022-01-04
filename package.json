@@ -1,0 +1,19 @@
+{
+  "name": "kirito-db",
+  "version": "1.0.0",
+  "description": "Kirito-DB",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.5",
+    "node-fetch": "^2.6.1",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "ThisMe124",
+  "license": "ISC"
+}
