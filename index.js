@@ -14,6 +14,12 @@ async function status(code) {
     return crs.createdAt
 }
 
+async function testDB() {
+    const crs = await fetchJson(`http://cdn.kiritosenpai.xyz/test/get`)
+    if(!crs) throw new Error("Fetch Error")
+    return crs.tes
+}
+
 async function whatsappWebVersion() {
     const crs = await fetch(`${baseURL}/check-update?version=1&platform=web`)
     const res = await crs.json()
@@ -30,7 +36,8 @@ async function whatsappWebVersionFull() {
 
 module.exports = {
     test, 
-    status, 
+    status,
+    testDB,
     whatsappWebVersion, 
     whatsappWebVersionFull
 }
