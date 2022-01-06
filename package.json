@@ -1,7 +1,7 @@
 {
-  "name": "kirito-db",
+  "name": "kirito-tools",
   "version": "1.0.0",
-  "description": "Kirito-DB",
+  "description": "Kirito-Tools Version Me ;)",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.24.0",
