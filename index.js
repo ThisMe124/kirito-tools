@@ -1,6 +1,5 @@
 const fetch = require('node-fetch')
-const baseurl = "http://kirito-db-api.vercel.app"
-const { version } = require('./package.json')
+const baseURL = "https://web.whatsapp.com/check-update?version=1&platform=web"
 
 async function test() {
     console.log("Hello Banh") 
@@ -8,7 +7,7 @@ async function test() {
 
 async function status(code) {
     if (!code) throw new Error("Error: No code provided")
-    const crs = await fetch(`${baseurl}/db/status?code=${encodeURIComponent(code)}`)
+    const crs = await fetch(`http://kirito-db-api.vercel.app/db/status?code=${encodeURIComponent(code)}`)
     const result = await crs.json()
     if(!result) throw new Error("Fetch Error")
     return result
@@ -16,6 +15,5 @@ async function status(code) {
 
 module.exports = {
     test, 
-    status, 
-    version
+    status
 }
