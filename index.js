@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const { fetchJson, fetchText } = require('./tzy.js')
 const baseURL = "https://web.whatsapp.com"
 
 async function test() {
@@ -7,10 +8,10 @@ async function test() {
 
 async function status(code) {
     if (!code) throw new Error("Error: No code provided")
-    const crs = await fetch(`http://kirito-db-api.vercel.app/db/status?code=${encodeURIComponent(code)}`)
-    const result = await crs.json()
-    if(!result) throw new Error("Fetch Error")
-    return result
+    const crs = await fetchJson(`http://kirito-db-api.vercel.app/db/status?code=${encodeURIComponent(code)}`)
+    //const result = await crs.json()
+    if(!crs) throw new Error("Fetch Error")
+    return crs.createdAt
 }
 
 async function whatsappWebVersion() {
