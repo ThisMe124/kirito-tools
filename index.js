@@ -16,19 +16,15 @@ async function status(code) {
 async function whatsappWebVersion() {
     const crs = await fetch(`${baseURL}/check-update?version=1&platform=web`)
     const res = await crs.json()
-    const text = await res.text()
-    const json = JSON.parse(text)
-    if(!json) throw new Error("Fetch Error")
-    return json.currentVersion
+    if(!res) throw new Error("Fetch Error")
+    return res.currentVersion
 }
 
 async function whatsappWebVersionFull() {
     const crs = await fetch(`${baseURL}/check-update?version=1&platform=web`)
     const res = await crs.json()
-    const text = await res.text()
-    const json = JSON.parse(text)
-    if(!json) throw new Error("Fetch Error")
-    return json
+    if(!res) throw new Error("Fetch Error")
+    return res
 }
 
 module.exports = {
