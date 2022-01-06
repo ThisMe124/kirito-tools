@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const baseURL = "https://web.whatsapp.com/check-update?version=1&platform=web"
+const baseURL = "https://web.whatsapp.com"
 
 async function test() {
     console.log("Hello Banh") 
@@ -13,7 +13,23 @@ async function status(code) {
     return result
 }
 
+async function whatsappWebVersion() {
+    const crs = await fetch(`${baseURL}/check-update?version=1&platform=web`)
+    const result = await crs.json()
+    if(!result) throw new Error("Fetch Error")
+    return result.currentVersion
+}
+
+async function whatsappWebVersionFull() {
+    const crs = await fetch(`${baseURL}/check-update?version=1&platform=web`)
+    const result = await crs.json()
+    if(!result) throw new Error("Fetch Error")
+    return result
+}
+
 module.exports = {
     test, 
-    status
+    status, 
+    whatsappWebVersion, 
+    whatsappWebVersionFull
 }
