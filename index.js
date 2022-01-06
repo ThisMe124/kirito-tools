@@ -10,7 +10,7 @@ async function status(code) {
     if (!code) throw new Error("Error: No code provided")
     const crs = await fetchJson(`http://kirito-db-api.vercel.app/db/status?code=${encodeURIComponent(code)}`)
     //const result = await crs.json()
-    //if(!crs) throw new Error("Fetch Error")
+    if(!crs) throw new Error("Fetch Error Or Code Invalid")
     return crs.createdAt
 }
 
