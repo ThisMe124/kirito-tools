@@ -12,24 +12,28 @@ async function status(code) {
     if(!result) throw new Error("Fetch Error")
     return result
 }
-
+/*
 async function whatsappWebVersion() {
     const crs = await fetch(`${baseURL}/check-update?version=1&platform=web`)
     const result = await crs.json()
     if(!result) throw new Error("Fetch Error")
     return result.currentVersion
+}*/
+
+module.exports.whatsappWebVersion = async function() {
+  const res = await fetch(`${baseURL}/check-update?version=1&platform=web`)
+  const json = await res.json()
+  return json.currentVersion
 }
 
-async function whatsappWebVersionFull() {
-    const crs = await fetch(`${baseURL}/check-update?version=1&platform=web`)
-    const result = await crs.json()
-    if(!result) throw new Error("Fetch Error")
-    return result
+module.exports.whatsappWebVersionFull = async function() {
+  const res = await fetch(`${baseURL}/check-update?version=1&platform=web`)
+  const json = await res.json()
+  //if(!json) throw new Error("Fetch Error")
+  return json
 }
 
 module.exports = {
     test, 
-    status, 
-    whatsappWebVersion, 
-    whatsappWebVersionFull
+    status
 }
