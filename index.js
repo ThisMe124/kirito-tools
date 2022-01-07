@@ -34,7 +34,17 @@ async function whatsappWebVersionFull() {
     return res
 }
 
+
+async function ip() {
+return new Promise(async (resolve, reject) => {
+var res = await fetch("http://ip-api.com/json/1.1.1.1?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query")
+let json = await res.json()
+resolve(json.country)
+})
+}
+
 module.exports = {
+    ip,
     test, 
     status,
     testDB,
