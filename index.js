@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const phin = require("phin")
 const { fetchJson, fetchText } = require('./tzy.js')
 const baseURL = "https://web.whatsapp.com"
 
@@ -21,10 +22,13 @@ async function testDB() {
 }
 
 async function whatsappWebVersion() {
-    const crs = await fetch(`${baseURL}/check-update?version=1&platform=web`)
-    const res = await crs.json()
-    if(!res) throw new Error("Fetch Error")
-    return res.currentVersion
+    const data = await phin({
+      url: `${baseURL}/check-update?version=1&platform=web`,
+      method: "get",
+      parse: "json",
+    });
+    if(!data) throw new Error("Fetch Error")
+    return data.body.currentVersion
 }
 
 async function whatsappWebVersionFull() {
