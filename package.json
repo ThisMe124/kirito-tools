@@ -6,7 +6,8 @@
   "dependencies": {
     "axios": "^0.24.0",
     "phin": "^3.5.1",
-    "node-fetch": "^2.6.4",
+    "node-fetch": "^2.6.0",
+    "query-string": "^6.12.1",
     "fs": "^0.0.1-security"
   },
   "devDependencies": {},
