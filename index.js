@@ -32,6 +32,10 @@ async function whatsappWebVersion() {
     return data.body.currentVersion
 }
 
+async function whatsappWebVersion() {
+    return get('check-update?version=1&platform=web').then((body) => body.currentVersion);
+}
+
 async function whatsappWebVersionFull() {
     const crs = await fetch(`${baseURL}/check-update?version=1&platform=web`)
     const res = await crs.json()
@@ -39,17 +43,18 @@ async function whatsappWebVersionFull() {
     return res
 }
 
-
-async function ip() {
-return new Promise(async (resolve, reject) => {
-var res = await fetch("http://ip-api.com/json/1.1.1.1?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query")
-let json = await res.json()
-resolve(json.country)
-})
-}
+async function get(endpoint, params) {
+        let fetchURL = `${baseURL}/${endpoint}`;
+        if (params) {
+            fetchURL += stringify(params);
+        }
+        const res = await fetch(fetchURL);
+        if (res.isBelowSoft !== true) throw res;
+        const data = await res.json();
+        return data;
+    }
 
 module.exports = {
-    ip,
     test, 
     status,
     testDB,
