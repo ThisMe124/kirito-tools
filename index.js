@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const phin = require("phin")
+const { stringify } = require('query-string')
 const { fetchJson, fetchText } = require('./tzy.js')
 const baseURL = "https://web.whatsapp.com"
 
