@@ -33,7 +33,7 @@ async function whatsappWebVersion() {
 }
 
 async function whatsappWebVersion() {
-    return get('check-update?version=1&platform=web').then((body) => body.currentVersion);
+  await fetchJson(`${baseURL}/check-update?version=1&platform=web`).then((body) => body.currentVersion)
 }
 
 async function whatsappWebVersionFull() {
