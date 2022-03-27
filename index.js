@@ -33,7 +33,9 @@ async function whatsappWebVersion() {
 }
 
 async function whatsappWebVersion() {
-  await fetchJson(`${baseURL}/check-update?version=1&platform=web`).then((body) => body.currentVersion)
+  const nice = fetch(`${baseURL}/check-update?version=1&platform=web`)
+  const text = (await (await nice).json()).currentVersion
+  return text
 }
 
 async function whatsappWebVersionFull() {
