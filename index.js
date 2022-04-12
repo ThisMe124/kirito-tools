@@ -45,6 +45,13 @@ async function whatsappWebVersionFull() {
     return res
 }
 
+async function loli() {
+const gf = await require("node-fetch")("https://raw.githubusercontent.com/ThisMe124/RANDOM-IMAGE/main/nsfw-loli.json").then((v) => v.json());
+const res = {}
+res.url = gf[Math.floor(Math.random() * gf.length)]
+return res
+}
+
 async function get(endpoint, params) {
         let fetchURL = `${baseURL}/${endpoint}`;
         if (params) {
