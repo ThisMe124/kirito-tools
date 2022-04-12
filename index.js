@@ -64,6 +64,7 @@ async function get(endpoint, params) {
     }
 
 module.exports = {
+    loli,
     test, 
     status,
     testDB,
