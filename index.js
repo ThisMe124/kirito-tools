@@ -1,8 +1,6 @@
 const fetch = require('node-fetch')
-const phin = require("phin")
-const { stringify } = require('query-string')
-const { fetchJson, fetchText } = require('./tzy.js')
 const baseURL = "https://web.whatsapp.com"
+const translate = require("@vitalets/google-translate-api");
 
 async function test() {
     console.log("Hello Banh") 
@@ -27,8 +25,18 @@ async function loli() {
     return res
 }
 
+async function translate(text = null, l = "id") {
+    result = {};
+    if (!text) throw `No String text.`
+    var res = await translate(text, { to: l })
+    result.status = true
+    result.result = { from_lang: res.from.language.iso, response: res.text };
+    return result
+}
+
 module.exports = {
     loli,
+    translate,
     whatsappWebVersion, 
     whatsappWebVersionFull
 }
