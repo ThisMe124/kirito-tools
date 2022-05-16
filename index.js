@@ -91,7 +91,7 @@ async function parseTime(seconds) {
       return dDisplay + hDisplay + mDisplay + sDisplay;
 }
 
-async function translate(text = null, l = "id") {
+async function translateText(text = null, l = "id") {
     result = {};
     if (!text) throw `No String text.`
     var res = await translate(text, { to: l })
