@@ -104,12 +104,13 @@ module.exports = {
     loli,
     sleep,
     isUrl, 
-    parseTime,
+    parseTime, 
     translate,
     getRandom,
     getBuffer,
     fetchJson, 
     jsonString, 
+    translateText, 
     whatsappWebVersion, 
     whatsappWebVersionFull
 }
