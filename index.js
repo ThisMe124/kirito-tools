@@ -138,6 +138,24 @@ async function timeCon(duration) {
     return res.join(' ').slice(0, -1);
 }
 
+async function createBar(total, current, size = 25, line = "▬", slider = "🔷") {
+    try {
+      if (!total) throw "MISSING MAX TIME";
+      if (!current) return `**[${slider}${line.repeat(size - 1)}]**`;
+      let bar = current > total 
+          ? [line.repeat(size / 2 * 2), (current / total) * 100] 
+          : [line.repeat(Math.round(size / 2 * (current / total))).replace(/.$/, slider) 
+            + line.repeat(size - Math.round(size * (current / total)) + 1), current / total];
+      if (!String(bar).includes(slider)) {
+        return `**[${slider}${line.repeat(size - 1)}]**`;
+      } else{
+        return `**[${bar[0]}]**`;
+      }
+    } catch (e) {
+      console.log(String(e.stack).bgRed)
+    }
+  }
+
 async function translateText(text = null, l = "id") {
     result = {};
     if (!text) throw `No String text.`
@@ -152,7 +170,8 @@ module.exports = {
     sleep,
     isUrl,
     timeCon, 
-    parseTime, 
+    createBar, 
+    parseTime,
     translate,
     getRandom,
     getBuffer,
