@@ -91,6 +91,53 @@ async function parseTime(seconds) {
       return dDisplay + hDisplay + mDisplay + sDisplay;
 }
 
+async function timeCon(duration) {
+    const s = i => i === 1 ? '' : 's';
+    const res = [];
+    const msInMinute = 1000 * 60;
+    const msInHour = msInMinute * 60;
+    const msInDay = msInHour * 24;
+    const msInWeek = msInDay * 7;
+    const msInMonth = (365.25 / 12) * msInDay;
+    const msInYear = msInMonth * 12;
+    const years = Math.trunc(duration / msInYear);
+    if (years > 0) {
+        res.push(years + ` year${s(years)},`);
+        duration = duration - (years * msInYear)
+    }
+    const months = Math.trunc(duration / msInMonth);
+    if (months > 0) {
+        res.push(months + ` month${s(months)},`);
+        duration = duration - (months * msInMonth)
+    }
+    const weeks = Math.trunc(duration / msInWeek);
+    if (weeks > 0) {
+        res.push(weeks + ` week${s(weeks)},`);
+        duration = duration - (weeks * msInWeek)
+    }
+    const days = Math.trunc(duration / msInDay);
+    if (days > 0) {
+        res.push(days + ` day${s(days)},`);
+        duration = duration - (days * msInDay)
+    }
+    const hours = Math.trunc(duration / msInHour);
+    if (hours > 0) {
+        res.push(hours + ` hour${s(hours)},`);
+        duration = duration - (hours * msInHour);
+    }
+    const minutes = Math.trunc(duration / msInMinute);
+    if (minutes > 0) {
+        res.push(minutes + ` minute${s(minutes)},`);
+        duration = duration - (minutes * msInMinute);
+    }
+    const seconds = Math.trunc(duration / 1000);
+    if (seconds > 0) {
+        res.push(seconds + ` second${s(seconds)},`);
+    }
+    res[res.length - 2] = res[res.length - 2]?.replace(',', ' and');
+    return res.join(' ').slice(0, -1);
+}
+
 async function translateText(text = null, l = "id") {
     result = {};
     if (!text) throw `No String text.`
@@ -103,7 +150,8 @@ async function translateText(text = null, l = "id") {
 module.exports = {
     loli,
     sleep,
-    isUrl, 
+    isUrl,
+    timeCon, 
     parseTime, 
     translate,
     getRandom,
