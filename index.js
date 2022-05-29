@@ -3,6 +3,8 @@ const baseURL = "https://web.whatsapp.com"
 const translate = require("@vitalets/google-translate-api");
 const axios = require('axios')
 const FormData = require("form-data")
+const got = require('got')
+const cheerio = require('cheerio')
 
 async function test() {
     console.log("Hello Banh") 
@@ -178,6 +180,34 @@ headers: {
 })
 }
 
+function getNhentaiInfo(id) {
+	return new Promise(async(resolve, reject) => {
+		const req = await got('https://nhentai.net/g/' + id + '/')
+		const $ = cheerio.load(req.body)
+		let title = $('#info').find('h1').text();
+		let nativeTitle = $('#info').find('h2').text();
+		let details = {};
+		$('.tag-container.field-name').find('count').each(function() {
+			this.text(` (${el.text()}) `);
+		})
+		$('.tag-container.field-name').text().split('\n').map(string => string.trim()).filter(u => u).map((tag, i, tags) => {
+			if (tag.endsWith(':') && !tags[i + 1].endsWith(':')) {
+				details[tag.substring(0, tag.length - 1).toLowerCase()] = tags[i + 1].replace(/(\([0-9,]+\))([a-zA-Z])/g, '$1 $2').split(/(?<=\))\s(?=[a-zA-Z])/);
+			}
+		});
+		const pages = []; 
+		$('#thumbnail-container').find('.thumbs > div.thumb-container').each((i, e) => {
+			pages.push($(e)
+			.find('.gallerythumb > img')
+			.attr('data-src')
+			.replace(/\/\/t/, '//i')
+			.replace(/t\.jpg/g, '.jpg')
+			.replace(/t\.png/g, '.png'))
+		})
+		resolve({ title,nativeTitle, details, pages })
+	})
+}
+
 async function translateText(text = null, l = "id") {
     result = {};
     if (!text) throw `No String text.`
@@ -199,7 +229,8 @@ module.exports = {
     getRandom,
     getBuffer,
     fetchJson, 
-    jsonString, 
+    jsonString,
+    getNhentaiInfo, 
     translateText, 
     whatsappWebVersion, 
     whatsappWebVersionFull
