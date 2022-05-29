@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 const baseURL = "https://web.whatsapp.com"
 const translate = require("@vitalets/google-translate-api");
 const axios = require('axios')
+const FormData = require("form-data")
 
 async function test() {
     console.log("Hello Banh") 
@@ -156,6 +157,27 @@ async function createBar(total, current, size = 25, line = "▬", slider = "🔷
     }
   }
 
+async function uploadFile(path) {
+new Promise((resolve, reject) => {
+const fs = require("fs");
+const fd = new FormData();
+fd.append("file", fs.createReadStream(path));
+axios({
+method: "POST",
+url: "https://api.anonfiles.com/upload",
+data: fd,
+maxContentLength: Infinity,
+maxBodyLength: Infinity,
+headers: {
+"user-agent": "Refresh :D",
+"content-type": `multipart/form-data; boundary=${fd._boundary}`,
+},
+})
+.then(({ data }) => resolve(data))
+.catch(reject)
+})
+}
+
 async function translateText(text = null, l = "id") {
     result = {};
     if (!text) throw `No String text.`
@@ -171,6 +193,7 @@ module.exports = {
     isUrl,
     timeCon, 
     createBar, 
+    uploadFile, 
     parseTime,
     translate,
     getRandom,
