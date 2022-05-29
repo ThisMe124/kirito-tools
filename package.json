@@ -8,6 +8,8 @@
     "phin": "^3.5.1",
     "node-fetch": "^2.6.0", 
     "form-data": "latest",
+    "cheerio": "^1.0.0-rc.10",
+    "got": "^11.8.3",
     "@vitalets/google-translate-api": "^8.0.0",
     "fs": "^0.0.1-security"
   },
