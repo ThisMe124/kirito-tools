@@ -5,7 +5,6 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.24.0",
-    "phin": "^3.5.1",
     "node-fetch": "^2.6.0", 
     "form-data": "latest",
     "cheerio": "^1.0.0-rc.10",
